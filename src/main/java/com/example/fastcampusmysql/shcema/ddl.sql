@@ -34,6 +34,7 @@ create unique index Follow_fromMemberId_toMemberId_uindex
 
 
 create table POST
+
 (
     id int auto_increment,
     memberId int not null,
@@ -49,6 +50,9 @@ create index POST__index_member_id
 
 create index POST__index_created_date
     on POST (createdDate);
+
+create index POST__index_member_id_created_date
+    on POST (memberId, createdDate);
 
 
 

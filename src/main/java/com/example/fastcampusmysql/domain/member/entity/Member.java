@@ -13,16 +13,16 @@ public class Member {
     final private Long id;
     private String nickname;
     final private String email;
-    final private LocalDate birthDay;
+    final private LocalDate birthday;
     final private LocalDateTime createdAt;
 
     final private static Long NAME_MAX_LENGTH = 10L;
 
     @Builder
-    public Member(Long id, String nickname, String email, LocalDate birthDay, LocalDateTime createdAt) {
+    public Member(Long id, String nickname, String email, LocalDate birthday, LocalDateTime createdAt) {
         this.id         = id;
         this.email      = Objects.requireNonNull(email);
-        this.birthDay   = Objects.requireNonNull(birthDay);
+        this.birthday = Objects.requireNonNull(birthday);
 
         validateNickname(nickname);
         this.nickname   = Objects.requireNonNull(nickname);
@@ -30,7 +30,13 @@ public class Member {
         this.createdAt  = createdAt == null ? LocalDateTime.now() : createdAt;
     }
 
-    void validateNickname(String nickname) {
+    public void changeNickname(String other) {
+        Objects.requireNonNull(other);
+        validateNickname(other);
+        nickname = other;
+    }
+
+    private void validateNickname(String nickname) {
         Assert.isTrue(nickname.length() <= NAME_MAX_LENGTH, "최대 길이를 초과했습니다.");
     }
 }
