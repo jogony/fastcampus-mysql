@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class PostWriteService {
     final private PostMapper postMapper;
-
-    public Long create(PostCommand command) {
-        return postMapper.save(command).id();
+    final private PostRepository postRepository;
+    public Long create(PostCommand command)
+    {
+        Post post = postMapper.toPostEntity(command);
+        return postMapper.toPostDto(postRepository.save(post)).id();
     }
 }

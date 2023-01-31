@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 public class MemberWriteService {
 
     final private MemberMapper memberMapper;
-    final private MemberRepository memberRepository;
     final private MemberNicknameHistoryRepository memberNicknameHistoryRepository;
+    final private MemberRepository memberRepository;
     public MemberDto create(RegisterMemberCommand command) {
         /*
             목표     - 회원정보를 등록한다.(이메일, 닉네임, 생년월일)을 등록한다
@@ -25,8 +25,10 @@ public class MemberWriteService {
             val member = Member.of(memberRegisterCommand)
             memberRepository.save(member)
         */
-        MemberDto savedMember = memberMapper.save(command);
-        memberMapper.saveMemberNicknameHistory(savedMember);
+        Member member = memberMapper.toMemberEntity(command);
+        MemberDto savedMember = memberMapper.toMemberDto(memberRepository.save(member));
+        MemberNicknameHistory history = memberMapper.toMemberNicknameHistoryEntity(savedMember);
+        memberNicknameHistoryRepository.save(history);
         return savedMember;
     }
 
@@ -35,8 +37,10 @@ public class MemberWriteService {
             1. 회원의 이름을 변경
             2. 변경 내역을 저장
          */
-        MemberDto member = memberMapper.changeNickname(memberId, nickname);
-        // TODO: 변경내역 히스토리를 저장한다.
-        memberMapper.saveMemberNicknameHistory(member);
+        Member member = memberRepository.findById(memberId).orElseThrow();
+        member.changeNickname(nickname);
+        // 변경내역 히스토리를 저장한다.
+        MemberNicknameHistory history = memberMapper.toMemberNicknameHistoryEntity(member);
+        memberNicknameHistoryRepository.save(history);
     }
 }

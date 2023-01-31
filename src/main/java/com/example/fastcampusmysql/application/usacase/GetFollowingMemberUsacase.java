@@ -1,7 +1,6 @@
-package com.example.fastcampusmysql.application.usecase;
+package com.example.fastcampusmysql.application.usacase;
 
 import com.example.fastcampusmysql.domain.follow.dto.FollowDto;
-import com.example.fastcampusmysql.domain.follow.entity.Follow;
 import com.example.fastcampusmysql.domain.follow.service.FollowReadService;
 import com.example.fastcampusmysql.domain.member.dto.MemberDto;
 import com.example.fastcampusmysql.domain.member.service.MemberReadService;
@@ -12,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class GetFollowingMemberUsecase {
+public class GetFollowingMemberUsacase {
     final private MemberReadService memberReadService;
     final private FollowReadService followReadService;
     public List<MemberDto> excute(Long memberId) {

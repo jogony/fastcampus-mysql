@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Repository
 public class FollowRepository {
-    static final String TABLE = "follow";
+    static final String TABLE = "Follow";
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     static final RowMapper<Follow> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> Follow
             .builder()
@@ -27,11 +27,18 @@ public class FollowRepository {
             .createdAt(resultSet.getObject("createdAt", LocalDateTime.class))
             .build();
 
-    public List<Follow> findAllByMemberId(Long fromMemberId) {
+    public List<Follow> findAllByFromMemberId(Long fromMemberId) {
         String sql = String.format("SELECT * FROM %s WHERE fromMemberId = :fromMemberId", TABLE);
         MapSqlParameterSource params = new MapSqlParameterSource().addValue("fromMemberId", fromMemberId);
         return namedParameterJdbcTemplate.query(sql, params, ROW_MAPPER);
     }
+
+    public List<Follow> findAllByToMemberId(Long toMemberId) {
+        String sql = String.format("SELECT * FROM %s WHERE toMemberId = :toMemberId", TABLE);
+        MapSqlParameterSource params = new MapSqlParameterSource().addValue("toMemberId", toMemberId);
+        return namedParameterJdbcTemplate.query(sql, params, ROW_MAPPER);
+    }
+
     public Follow save(Follow follow) {
         if(follow.getId() == null) {
             return insert(follow);

@@ -8,11 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.util.Objects;
 @RequiredArgsConstructor
 @Service
 public class FollowWriteService {
     final private FollowMapper followMapper;
+    final private FollowRepository followRepository;
     public void create(MemberDto fromMember, MemberDto toMember) {
         /*
             from, to 회원 정보를 받아서
@@ -21,6 +21,10 @@ public class FollowWriteService {
          */
         Assert.isTrue(!fromMember.id().equals(toMember.id()), "From, To 회원이 동일합니다.");
 
-        followMapper.save(fromMember, toMember);
+        Follow follow = Follow.builder()
+                .fromMemberId(fromMember.id())
+                .toMemberId(toMember.id())
+                .build();
+        followRepository.save(follow);
     }
 }

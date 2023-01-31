@@ -1,4 +1,4 @@
-package com.example.fastcampusmysql.application.usecase;
+package com.example.fastcampusmysql.application.usacase;
 
 import com.example.fastcampusmysql.domain.follow.service.FollowWriteService;
 import com.example.fastcampusmysql.domain.member.dto.MemberDto;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class CreateFollowMemberUsecase {
+public class CreateFollowMemberUsacase {
     final private MemberReadService memberReadService;
     final private FollowWriteService followWriteService;
     public void excute(Long fromMemberId, Long toMemberId) {
