@@ -26,10 +26,10 @@ public class MemberWriteService {
             memberRepository.save(member)
         */
         Member member = memberMapper.toMemberEntity(command);
-        MemberDto savedMember = memberMapper.toMemberDto(memberRepository.save(member));
+        Member savedMember = memberRepository.save(member);
         MemberNicknameHistory history = memberMapper.toMemberNicknameHistoryEntity(savedMember);
         memberNicknameHistoryRepository.save(history);
-        return savedMember;
+        return memberMapper.toMemberDto(savedMember);
     }
 
     public void changeNickName(Long memberId, String nickname) {

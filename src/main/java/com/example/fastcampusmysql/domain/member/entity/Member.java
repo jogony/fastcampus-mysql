@@ -26,7 +26,6 @@ public class Member {
 
         validateNickname(nickname);
         this.nickname   = Objects.requireNonNull(nickname);
-
         this.createdAt  = createdAt == null ? LocalDateTime.now() : createdAt;
     }
 
