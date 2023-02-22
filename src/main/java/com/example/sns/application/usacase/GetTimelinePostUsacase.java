@@ -2,6 +2,7 @@ package com.example.sns.application.usacase;
 
 import com.example.sns.domain.follow.dto.FollowDto;
 import com.example.sns.domain.follow.service.FollowReadService;
+import com.example.sns.domain.post.dto.PostDto;
 import com.example.sns.domain.post.entity.Post;
 import com.example.sns.domain.post.entity.Timeline;
 import com.example.sns.domain.post.service.PostReadService;
@@ -19,7 +20,7 @@ public class GetTimelinePostUsacase {
     final private FollowReadService followReadService;
     final private PostReadService postReadService;
     final private TimelineReadService timelineReadService;
-    public PageCursor<Post> execute(Long memberId, CursorRequest cursorRequest) {
+    public PageCursor<PostDto> execute(Long memberId, CursorRequest cursorRequest) {
         /*
             1. memberId -> follow 조회
             2. 1번 결과로 게시글 조회

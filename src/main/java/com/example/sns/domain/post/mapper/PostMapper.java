@@ -15,7 +15,9 @@ public interface PostMapper {
     @Mappings({
             @Mapping(target = "id", ignore = true),
             @Mapping(target = "createdDate", ignore = true),
-            @Mapping(target = "createdAt", ignore = true)
+            @Mapping(target = "createdAt", ignore = true),
+            @Mapping(target = "likeCount", ignore = true),
+            @Mapping(target = "version", ignore = true)
     })
     Post toPostEntity(PostCommand command);
 }
