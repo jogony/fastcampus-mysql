@@ -14,9 +14,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class CreatePostUsacase {
-    final private PostWriteService postWriteService;
-    final private FollowReadService followReadService;
-    final private TimelineWriteService timelineWriteService;
+    private final PostWriteService postWriteService;
+    private final FollowReadService followReadService;
+    private final TimelineWriteService timelineWriteService;
 
     @Transactional
     public Long execute(PostCommand postCommand) {

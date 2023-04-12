@@ -17,9 +17,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class GetTimelinePostUsacase {
-    final private FollowReadService followReadService;
-    final private PostReadService postReadService;
-    final private TimelineReadService timelineReadService;
+    private final FollowReadService followReadService;
+    private final PostReadService postReadService;
+    private final TimelineReadService timelineReadService;
     public PageCursor<PostDto> execute(Long memberId, CursorRequest cursorRequest) {
         /*
             1. memberId -> follow 조회

@@ -22,7 +22,7 @@ public class Member {
     public Member(Long id, String nickname, String email, LocalDate birthday, LocalDateTime createdAt) {
         this.id         = id;
         this.email      = Objects.requireNonNull(email);
-        this.birthday = Objects.requireNonNull(birthday);
+        this.birthday   = Objects.requireNonNull(birthday);
 
         validateNickname(nickname);
         this.nickname   = Objects.requireNonNull(nickname);
